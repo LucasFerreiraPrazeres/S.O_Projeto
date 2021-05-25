@@ -2,10 +2,12 @@
 TIMEFORMAT=%R
 total=0
 
-for i in i$(seq 1 50); do
-	time=$({ time python3 fernet.py &>/dev/null; } 2>&1)
-	total=$(echo "scale=4;$total + $time" | bc)
+for i in i$(seq 1 500); do
+	#time=$({ time python3 fernet.py &>/dev/null; } 2>&1)
+	tempo=$({ //usr/bin/time --format='tempo=%E
+memoria= %M kernel=%S usr=%U' python3 fernet.py &>/dev/null; } 2>&1)
+	total=$(echo "scale=4;$total + $tempo" | bc)
 done 
 
-avg=$(echo "scale=4;$total / 50" | bc)
-printf "Avg Time: %.4f\n" $avg 
+resultado=$(echo "scale=4;$total / 500" | bc)
+printf "Tempo: %.4f\n" $resultado 
